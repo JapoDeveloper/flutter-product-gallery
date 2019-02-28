@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
-  List<Widget> options;
+  final List<Widget> options;
 
   CustomDrawer({this.options});
 
