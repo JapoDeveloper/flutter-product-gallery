@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import '../pages/manage_product_page.dart';
+
 import '../product_list.dart';
 import '../custom_drawer.dart';
 
@@ -43,13 +45,23 @@ class _ProductPageState extends State<ProductsPage> {
     ]);
   }
 
+  List<Widget> _buildDrawerOptions(){
+    return [
+       ListTile(
+            title: Text('Manage Product'),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ManageProductPage())),
+          ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('EasyLists'),
       ),
-      drawer: CustomDrawer(),
+      drawer: CustomDrawer(options:_buildDrawerOptions()),
       body: Container(
           child: Container(
         margin: EdgeInsets.all(10.0),

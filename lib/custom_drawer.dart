@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 
-import './pages/products_page.dart';
-import './pages/manage_product_page.dart';
-
 class CustomDrawer extends StatelessWidget {
+  List<Widget> options;
+
+  CustomDrawer({this.options});
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> widgets = [
+      AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('Settings'),
+      ),
+    ];
+    if (options != null) {
+      widgets.addAll(options);
+    }
+    //Include other Drawer widgets here
+    //widgets.add(_your_widget_here)
+
     return Drawer(
       child: Column(
-        children: <Widget>[
-          AppBar(
-            automaticallyImplyLeading: false,
-            title: Text('Settings'),
-          ),
-          ListTile(
-            title: Text('Manage Product'),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ManageProductPage())),
-          ),
-          ListTile(
-            title: Text('List Products'),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProductsPage())),
-          )
-        ],
+        children: widgets,
       ),
     );
   }
