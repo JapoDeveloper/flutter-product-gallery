@@ -5,6 +5,33 @@ class ProductPage extends StatelessWidget {
 
   ProductPage(this._product);
 
+  void _showDeleteWarning(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('This action cannot be undone.'),
+            actions: <Widget>[
+              RaisedButton(
+                color: Colors.redAccent,
+                textColor: Colors.blueGrey,
+                child: Text('DISCARD'),
+                onPressed: () => Navigator.pop(context),
+              ),
+              RaisedButton(
+                color: Colors.greenAccent,
+                textColor: Colors.blueGrey,
+                child: Text('ACCEPT'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context, {'remove': true});
+                },
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +50,13 @@ class ProductPage extends StatelessWidget {
                 RaisedButton(
                   color: Theme.of(context).accentColor,
                   child: Row(children: [
-                    Icon(Icons.delete, color: Colors.blueGrey,),
-                    Text('Delete')]),
-                  onPressed: () => Navigator.pop(context,{'remove':true}),
+                    Icon(
+                      Icons.delete,
+                      color: Colors.blueGrey,
+                    ),
+                    Text('Delete')
+                  ]),
+                  onPressed: () => _showDeleteWarning(context),
                 )
               ],
             )
